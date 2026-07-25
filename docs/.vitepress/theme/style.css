@@ -84,6 +84,7 @@
   font-size: clamp(30px, 4vw, 44px);
   line-height: 1.18;
   letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .VPHomeHero .tagline {
@@ -92,6 +93,7 @@
   font-size: 17px;
   line-height: 1.76;
   letter-spacing: -0.01em;
+  text-wrap: pretty;
 }
 
 .VPHomeHero .image-bg {
@@ -159,11 +161,13 @@
 .VPFeature .title {
   font-weight: 780;
   letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .VPFeature .details {
   line-height: 1.68;
   letter-spacing: -0.01em;
+  text-wrap: pretty;
 }
 
 .VPDoc .content-container {
@@ -174,6 +178,7 @@
 .vp-doc h2,
 .vp-doc h3 {
   letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 
 .vp-doc h1 {
@@ -188,6 +193,26 @@
 .vp-doc p,
 .vp-doc li {
   line-height: 1.82;
+}
+
+.vp-doc p {
+  text-wrap: pretty;
+}
+
+html[lang="ko"] :where(
+  .VPHomeHero .name,
+  .VPHomeHero .text,
+  .VPHomeHero .tagline,
+  .VPFeature .title,
+  .VPFeature .details,
+  .vp-doc h1,
+  .vp-doc h2,
+  .vp-doc h3,
+  .vp-doc p,
+  .vp-doc li
+) {
+  overflow-wrap: break-word;
+  word-break: keep-all;
 }
 
 .vp-doc table {
