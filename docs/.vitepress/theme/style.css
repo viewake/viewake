@@ -10,7 +10,6 @@
   --viewake-navy: #071438;
   --viewake-link: #071438;
   --vp-custom-block-tip-border: rgba(7, 20, 56, 0.18);
-  --vp-custom-block-tip-text: #071438;
   --viewake-hero-gradient:
     linear-gradient(110deg, #071438 8%, #071438 52%, #071438);
   --vp-layout-max-width: 1540px;
@@ -148,6 +147,20 @@
   color: var(--viewake-navy);
   text-decoration: underline 2px var(--viewake-accent);
   text-underline-offset: 5px;
+}
+
+:root:not(.dark) :where(
+  .vp-doc :not(pre) > code,
+  .custom-block a,
+  .custom-block code,
+  .VPDocAsideOutline .outline-link.active,
+  .VPLocalNavOutlineDropdown .outline-link.active,
+  .VPDocFooter .pager-link:hover .title,
+  .VPSidebarItem .is-active > .item .link > .text,
+  .VPFeature.link:hover .title
+) {
+  -webkit-text-stroke: 0.35px rgba(7, 20, 56, 0.48);
+  paint-order: stroke fill;
 }
 
 .VPFeature {

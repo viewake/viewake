@@ -362,7 +362,7 @@ onBeforeUnmount(() => controller?.destroy());
   color: var(--viewake-accent-ink);
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.16em;
+  letter-spacing: normal;
 }
 
 h2 {
