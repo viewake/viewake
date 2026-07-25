@@ -355,10 +355,11 @@ onBeforeUnmount(() => controller?.destroy());
 
 .eyebrow {
   display: inline-flex;
+  border: 1px solid var(--viewake-accent-border);
   border-radius: 999px;
   background: var(--viewake-accent);
   padding: 5px 8px;
-  color: #071438;
+  color: var(--viewake-accent-ink);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -459,10 +460,11 @@ select {
 }
 
 .demo-badge {
+  border: 1px solid var(--viewake-accent-border);
   border-radius: 999px;
   background: #d9ff36;
   padding: 6px 10px;
-  color: #071438;
+  color: var(--viewake-accent-ink);
   font-size: 11px;
   font-weight: 800;
 }
@@ -509,11 +511,11 @@ select {
 }
 
 button {
-  border: 0;
+  border: 1px solid var(--viewake-accent-border);
   border-radius: 12px;
   background: var(--viewake-accent);
   padding: 12px 16px;
-  color: #071438;
+  color: var(--viewake-accent-ink);
   font: inherit;
   font-size: 13px;
   font-weight: 800;

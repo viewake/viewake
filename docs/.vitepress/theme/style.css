@@ -1,12 +1,16 @@
 :root {
-  --vp-c-brand-1: #d9ff36;
-  --vp-c-brand-2: #d9ff36;
-  --vp-c-brand-3: #d9ff36;
+  --vp-c-brand-1: #3f4d00;
+  --vp-c-brand-2: #354100;
+  --vp-c-brand-3: #2c3600;
   --vp-c-brand-soft: rgba(217, 255, 54, 0.18);
   --viewake-accent: #d9ff36;
   --viewake-accent-hover: #d9ff36;
+  --viewake-accent-border: rgba(7, 20, 56, 0.2);
+  --viewake-accent-ink: #071438;
   --viewake-navy: #071438;
   --viewake-link: #071438;
+  --vp-custom-block-tip-border: rgba(7, 20, 56, 0.18);
+  --vp-custom-block-tip-text: #071438;
   --viewake-hero-gradient:
     linear-gradient(110deg, #071438 8%, #071438 52%, #071438);
   --vp-layout-max-width: 1540px;
@@ -38,6 +42,7 @@
   --vp-custom-block-tip-bg: rgba(217, 255, 54, 0.07);
   --vp-custom-block-tip-border: rgba(217, 255, 54, 0.28);
   --vp-custom-block-tip-text: #d9ff36;
+  --viewake-accent-border: rgba(217, 255, 54, 0.46);
   --viewake-link: #d9ff36;
   --viewake-hero-gradient:
     linear-gradient(110deg, #d9ff36 8%, #d9ff36 52%, #d9ff36);
@@ -79,6 +84,7 @@
   font-size: clamp(30px, 4vw, 44px);
   line-height: 1.18;
   letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .VPHomeHero .tagline {
@@ -87,6 +93,7 @@
   font-size: 17px;
   line-height: 1.76;
   letter-spacing: -0.01em;
+  text-wrap: pretty;
 }
 
 .VPHomeHero .image-bg {
@@ -114,13 +121,13 @@
 }
 
 .VPButton.brand {
-  border-color: #d9ff36 !important;
+  border-color: var(--viewake-accent-border) !important;
   background: #d9ff36 !important;
-  color: #071438 !important;
+  color: var(--viewake-accent-ink) !important;
 }
 
 .VPButton.brand:hover {
-  border-color: var(--viewake-accent-hover) !important;
+  border-color: var(--viewake-accent-border) !important;
   background: var(--viewake-accent-hover) !important;
 }
 
@@ -154,11 +161,13 @@
 .VPFeature .title {
   font-weight: 780;
   letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .VPFeature .details {
   line-height: 1.68;
   letter-spacing: -0.01em;
+  text-wrap: pretty;
 }
 
 .VPDoc .content-container {
@@ -169,6 +178,7 @@
 .vp-doc h2,
 .vp-doc h3 {
   letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 
 .vp-doc h1 {
@@ -183,6 +193,26 @@
 .vp-doc p,
 .vp-doc li {
   line-height: 1.82;
+}
+
+.vp-doc p {
+  text-wrap: pretty;
+}
+
+html[lang="ko"] :where(
+  .VPHomeHero .name,
+  .VPHomeHero .text,
+  .VPHomeHero .tagline,
+  .VPFeature .title,
+  .VPFeature .details,
+  .vp-doc h1,
+  .vp-doc h2,
+  .vp-doc h3,
+  .vp-doc p,
+  .vp-doc li
+) {
+  overflow-wrap: break-word;
+  word-break: keep-all;
 }
 
 .vp-doc table {

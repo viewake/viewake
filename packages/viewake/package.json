@@ -2,6 +2,16 @@
   "name": "viewake",
   "version": "0.1.0",
   "description": "Wake elements when they enter from below the viewport.",
+  "author": "Viewake contributors",
+  "homepage": "https://viewake.github.io/viewake/",
+  "bugs": {
+    "url": "https://github.com/viewake/viewake/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viewake/viewake.git",
+    "directory": "packages/viewake"
+  },
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json && vite build --config vite.config.ts",
