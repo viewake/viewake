@@ -1,4 +1,9 @@
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitepress";
+
+const viewakeSource = fileURLToPath(
+  new URL("../../packages/viewake/src/index.ts", import.meta.url),
+);
 
 const englishSidebar = [
   {
@@ -76,6 +81,16 @@ const koreanSidebar = [
 
 export default defineConfig({
   base: "/viewake/",
+  vite: {
+    resolve: {
+      alias: [
+        {
+          find: /^viewake$/,
+          replacement: viewakeSource,
+        },
+      ],
+    },
+  },
   title: "Viewake",
   description: "Wake elements as they enter the view.",
   appearance: "dark",
