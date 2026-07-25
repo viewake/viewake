@@ -1,0 +1,47 @@
+{
+  "name": "viewake",
+  "version": "0.1.0",
+  "description": "Wake elements when they enter from below the viewport.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && vite build --config vite.config.ts",
+    "prepack": "npm run build"
+  },
+  "sideEffects": [
+    "./styles/viewake.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/viewake.global.js",
+  "jsdelivr": "./dist/viewake.global.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./styles/viewake.css"
+  },
+  "files": [
+    "dist",
+    "styles",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "animation",
+    "scroll",
+    "reveal",
+    "intersection-observer",
+    "viewport",
+    "typescript"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

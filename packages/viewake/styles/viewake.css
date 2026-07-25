@@ -1,0 +1,166 @@
+/*
+ * Viewake's JavaScript only toggles:
+ *   data-viewake-state="pending" <-> "active"
+ *
+ * Animation names and visual behavior live entirely in this file.
+ */
+[data-viewake] {
+  --viewake-delay: 0ms;
+  --viewake-duration: 600ms;
+  --viewake-distance: 24px;
+  --viewake-slide-distance: 72px;
+  --viewake-perspective: 1000px;
+  --viewake-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transform: none;
+  transition-delay: var(--viewake-delay);
+  transition-duration: var(--viewake-duration);
+  transition-property: opacity, transform, filter;
+  transition-timing-function: var(--viewake-easing);
+  backface-visibility: hidden;
+}
+
+[data-viewake][data-viewake-state="pending"] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+[data-viewake][data-viewake-state="active"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  will-change: auto;
+}
+
+/* Fade */
+[data-viewake="fade-up"][data-viewake-state="pending"] {
+  transform: translate3d(0, var(--viewake-distance), 0);
+}
+
+[data-viewake="fade-down"][data-viewake-state="pending"] {
+  transform: translate3d(0, calc(var(--viewake-distance) * -1), 0);
+}
+
+[data-viewake="fade-left"][data-viewake-state="pending"] {
+  transform: translate3d(var(--viewake-distance), 0, 0);
+}
+
+[data-viewake="fade-right"][data-viewake-state="pending"] {
+  transform: translate3d(calc(var(--viewake-distance) * -1), 0, 0);
+}
+
+[data-viewake="fade-up-right"][data-viewake-state="pending"] {
+  transform: translate3d(
+    calc(var(--viewake-distance) * -1),
+    var(--viewake-distance),
+    0
+  );
+}
+
+[data-viewake="fade-up-left"][data-viewake-state="pending"] {
+  transform: translate3d(
+    var(--viewake-distance),
+    var(--viewake-distance),
+    0
+  );
+}
+
+[data-viewake="fade-down-right"][data-viewake-state="pending"] {
+  transform: translate3d(
+    calc(var(--viewake-distance) * -1),
+    calc(var(--viewake-distance) * -1),
+    0
+  );
+}
+
+[data-viewake="fade-down-left"][data-viewake-state="pending"] {
+  transform: translate3d(
+    var(--viewake-distance),
+    calc(var(--viewake-distance) * -1),
+    0
+  );
+}
+
+/* Slide */
+[data-viewake="slide-up"][data-viewake-state="pending"] {
+  transform: translate3d(0, var(--viewake-slide-distance), 0);
+}
+
+[data-viewake="slide-down"][data-viewake-state="pending"] {
+  transform: translate3d(0, calc(var(--viewake-slide-distance) * -1), 0);
+}
+
+[data-viewake="slide-left"][data-viewake-state="pending"] {
+  transform: translate3d(var(--viewake-slide-distance), 0, 0);
+}
+
+[data-viewake="slide-right"][data-viewake-state="pending"] {
+  transform: translate3d(calc(var(--viewake-slide-distance) * -1), 0, 0);
+}
+
+/* Zoom */
+[data-viewake="zoom-in"][data-viewake-state="pending"] {
+  transform: scale(0.86);
+}
+
+[data-viewake="zoom-in-up"][data-viewake-state="pending"] {
+  transform: translate3d(0, var(--viewake-distance), 0) scale(0.86);
+}
+
+[data-viewake="zoom-in-down"][data-viewake-state="pending"] {
+  transform: translate3d(0, calc(var(--viewake-distance) * -1), 0) scale(0.86);
+}
+
+[data-viewake="zoom-in-left"][data-viewake-state="pending"] {
+  transform: translate3d(var(--viewake-distance), 0, 0) scale(0.86);
+}
+
+[data-viewake="zoom-in-right"][data-viewake-state="pending"] {
+  transform: translate3d(calc(var(--viewake-distance) * -1), 0, 0) scale(0.86);
+}
+
+[data-viewake="zoom-out"][data-viewake-state="pending"] {
+  transform: scale(1.14);
+}
+
+[data-viewake="zoom-out-up"][data-viewake-state="pending"] {
+  transform: translate3d(0, var(--viewake-distance), 0) scale(1.14);
+}
+
+[data-viewake="zoom-out-down"][data-viewake-state="pending"] {
+  transform: translate3d(0, calc(var(--viewake-distance) * -1), 0) scale(1.14);
+}
+
+[data-viewake="zoom-out-left"][data-viewake-state="pending"] {
+  transform: translate3d(var(--viewake-distance), 0, 0) scale(1.14);
+}
+
+[data-viewake="zoom-out-right"][data-viewake-state="pending"] {
+  transform: translate3d(calc(var(--viewake-distance) * -1), 0, 0) scale(1.14);
+}
+
+/* Flip */
+[data-viewake="flip-up"][data-viewake-state="pending"] {
+  transform: perspective(var(--viewake-perspective)) rotateX(-70deg);
+}
+
+[data-viewake="flip-down"][data-viewake-state="pending"] {
+  transform: perspective(var(--viewake-perspective)) rotateX(70deg);
+}
+
+[data-viewake="flip-left"][data-viewake-state="pending"] {
+  transform: perspective(var(--viewake-perspective)) rotateY(70deg);
+}
+
+[data-viewake="flip-right"][data-viewake-state="pending"] {
+  transform: perspective(var(--viewake-perspective)) rotateY(-70deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-viewake] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}

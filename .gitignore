@@ -1,0 +1,8 @@
+node_modules/
+.idea/
+dist/
+docs/.vitepress/cache/
+site/
+coverage/
+.DS_Store
+*.log
