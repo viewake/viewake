@@ -2,6 +2,16 @@
   "name": "viewake-react",
   "version": "0.1.0",
   "description": "React and Next.js adapter for Viewake.",
+  "author": "Viewake contributors",
+  "homepage": "https://viewake.github.io/viewake/frameworks/react-next",
+  "bugs": {
+    "url": "https://github.com/viewake/viewake/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viewake/viewake.git",
+    "directory": "packages/react"
+  },
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -28,7 +38,14 @@
   },
   "peerDependencies": {
     "react": ">=18",
-    "viewake": ">=0.1.0"
+    "viewake": "^0.1.0"
   },
+  "keywords": [
+    "animation",
+    "scroll",
+    "react",
+    "nextjs",
+    "intersection-observer"
+  ],
   "license": "MIT"
 }

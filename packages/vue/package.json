@@ -2,6 +2,16 @@
   "name": "viewake-vue",
   "version": "0.1.0",
   "description": "Vue 3 directive and plugin for Viewake.",
+  "author": "Viewake contributors",
+  "homepage": "https://viewake.github.io/viewake/frameworks/vue",
+  "bugs": {
+    "url": "https://github.com/viewake/viewake/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viewake/viewake.git",
+    "directory": "packages/vue"
+  },
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -27,8 +37,15 @@
     "access": "public"
   },
   "peerDependencies": {
-    "viewake": ">=0.1.0",
+    "viewake": "^0.1.0",
     "vue": ">=3.3"
   },
+  "keywords": [
+    "animation",
+    "scroll",
+    "vue",
+    "directive",
+    "intersection-observer"
+  ],
   "license": "MIT"
 }
