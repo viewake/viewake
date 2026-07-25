@@ -18,7 +18,10 @@ export type ViewakeProps = HTMLAttributes<HTMLDivElement> & {
   duration?: number;
   easing?: string;
   mode?: ViewakeMode;
-  options?: Omit<UseViewakeOptions, "mode">;
+  options?: Omit<
+    UseViewakeOptions,
+    "mode" | "delay" | "duration" | "easing"
+  >;
 };
 
 export function Viewake({

@@ -10,6 +10,8 @@ Viewake의 공개 HTML API는 클래스 이름이 아니라 `data-viewake-*` 속
 
 Viewake는 기본 선택자인 `[data-viewake]`로 이 요소를 찾습니다. `fade-up` 값은 `viewake/styles.css`에 정의된 CSS 프리셋을 선택합니다.
 
+일반 JavaScript에서는 `init()`이 이 선택자로 문서 안의 요소를 찾습니다. React 컴포넌트·훅과 Vue 디렉티브는 자신이 연결된 요소를 컨트롤러에 직접 전달하므로 별도의 `init()`이 필요하지 않습니다. 어떤 방식을 사용해도 최종 DOM의 `data-*` 속성과 동작 규칙은 같습니다.
+
 ## 사용할 수 있는 속성
 
 ```html
@@ -34,6 +36,8 @@ Viewake는 기본 선택자인 `[data-viewake]`로 이 요소를 찾습니다. `
 | `data-viewake-state` | 직접 사용 금지 | 자동 | 코어가 `pending`/`active`로 관리 |
 
 ## 요소 설정과 전역 설정의 우선순위
+
+아래 `init()` 예시는 일반 JavaScript에서 코어 패키지를 직접 사용할 때의 설정입니다.
 
 ```js
 init({

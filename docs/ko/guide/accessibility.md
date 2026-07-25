@@ -50,10 +50,11 @@ import { createViewake } from "viewake";
 React 어댑터는 `useEffect` 안에서 컨트롤러를 생성합니다. effect는 서버에서
 실행되지 않습니다.
 
-## 의미 구조는 그대로 유지
+## 의미 구조는 사용 방식에 맞게 유지
 
-Viewake는 wrapper를 요구하지 않습니다. `article`, `section`, `li`처럼 콘텐츠에
-맞는 의미 요소에 `data-viewake`를 직접 붙일 수 있습니다.
+코어의 data 속성, React의 `useViewake()` 훅, Vue directive는 wrapper를 만들지
+않습니다. `article`, `section`, `li`처럼 콘텐츠에 맞는 의미 요소 자체를
+관찰할 수 있습니다.
 
 ```html
 <article data-viewake="fade-up">
@@ -61,6 +62,10 @@ Viewake는 wrapper를 요구하지 않습니다. `article`, `section`, `li`처�
   <p>본문</p>
 </article>
 ```
+
+React의 `<Viewake>` 컴포넌트만 편의를 위해 `div`를 렌더링합니다. `ul` 바로
+아래의 `li`처럼 직접 자식 구조가 중요하다면 `<Viewake>`로 감싸지 말고
+`useViewake<HTMLLIElement>()`를 사용하세요.
 
 애니메이션을 위해 `aria-hidden="true"`를 추가하면 스크린 리더에서도 콘텐츠가
 사라지므로 사용하지 마세요.

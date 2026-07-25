@@ -51,7 +51,8 @@ the server.
 
 ## Preserve semantic HTML
 
-No wrapper is required. Add `data-viewake` directly to the meaningful element.
+Core data attributes, the React `useViewake()` hook, and the Vue directive add
+no wrapper. Observe the meaningful element directly.
 
 ```html
 <article data-viewake="fade-up">
@@ -59,6 +60,10 @@ No wrapper is required. Add `data-viewake` directly to the meaningful element.
   <p>Body</p>
 </article>
 ```
+
+The React `<Viewake>` component is the one convenience API that renders a
+`div`. Use the hook when direct-child semantics such as `ul > li` must remain
+unchanged.
 
 Do not add `aria-hidden="true"` for the animation—it would also hide content
 from assistive technology.

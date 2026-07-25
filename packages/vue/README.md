@@ -19,6 +19,9 @@ import App from "./App.vue";
 createApp(App).use(ViewakePlugin).mount("#app");
 ```
 
+Do not call the core `init()` as well. The directive observes the real element
+without inserting a wrapper and cleans up on unmount.
+
 ```vue
 <article
   v-viewake="{
@@ -54,5 +57,11 @@ import "viewake/styles.css";
 
 The directive starts observation on `mounted`, reapplies changed settings on
 `updated`, and destroys its controller on `unmounted`.
+
+Use `createViewakePlugin({ mode: "replay", threshold: 0.2 })` when the
+application needs shared defaults. A mode supplied by one directive overrides
+the plugin default.
+
+Read the complete [Vue 3 guide](https://viewake.github.io/viewake/frameworks/vue).
 
 MIT

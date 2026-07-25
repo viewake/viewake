@@ -2,9 +2,8 @@
 
 번들러 없이 AOS처럼 CSS와 전역 스크립트 두 개만 연결할 수 있습니다.
 
-::: warning 배포 전 안내
-아래 CDN URL은 `viewake@0.1.0` 패키지를 npm에 공개한 뒤 활성화됩니다.
-:::
+CDN 방식에서만 전역 `Viewake.init()`을 호출합니다. React·Vue adapter 문법과
+섞지 마세요.
 
 ## 1. CSS 연결
 
@@ -101,4 +100,4 @@ CDN 사용에서도 JavaScript를 바꾸지 않고 CSS 효과를 확장할 수 �
 
 - 빈 HTML 파일에서 CSS·스크립트·초기화만으로 실행했다.
 - once와 replay를 data 속성 하나의 차이로 만들었다.
-- CSS에 `viewake-pop`을 추가하고 코어 수정 없이 사용했다.
+- CSS에 `pop` 애니메이션을 추가하고 코어 수정 없이 사용했다.

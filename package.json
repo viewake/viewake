@@ -15,7 +15,7 @@
     "dev:docs": "vitepress dev docs",
     "preview:docs": "vitepress preview docs",
     "typecheck": "tsc -p packages/viewake/tsconfig.json && tsc -p packages/react/tsconfig.json --noEmit && tsc -p packages/vue/tsconfig.json --noEmit",
-    "test": "npm run build:core && node --test tests/*.test.mjs",
+    "test": "npm run build:core && npm run build:adapters && node --test tests/*.test.mjs",
     "check": "npm run typecheck && npm run build:adapters && npm run test && npm run build:docs"
   },
   "devDependencies": {

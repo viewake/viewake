@@ -1,6 +1,6 @@
 {
   "name": "viewake-vue",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue 3 directive and plugin for Viewake.",
   "author": "Viewake contributors",
   "homepage": "https://viewake.github.io/viewake/frameworks/vue",

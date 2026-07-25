@@ -30,7 +30,11 @@
 
 ## 전역 기본값 지정
 
+일반 JavaScript에서 코어 패키지를 직접 쓸 때는 `init()`에 기본 모드를 전달합니다.
+
 ```js
+import { init } from "viewake";
+
 init({ mode: "replay" });
 ```
 
@@ -39,6 +43,8 @@ init({ mode: "replay" });
 ```html
 <div data-viewake="zoom-in" data-viewake-mode="once">...</div>
 ```
+
+React에서는 `<Viewake mode="replay">` 또는 `useViewake({ mode: "replay" })`를 사용하고, Vue에서는 directive 객체나 `createViewakePlugin({ mode: "replay" })`에 전달합니다. React와 Vue에서는 `init()`을 추가로 호출하지 않습니다.
 
 ## 상태 흐름
 

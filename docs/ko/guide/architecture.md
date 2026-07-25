@@ -3,12 +3,22 @@
 이 장은 Viewake를 직접 다시 구현할 수 있도록 브라우저 관점에서 실행 흐름을
 설명합니다.
 
+## integration마다 시작점만 다릅니다
+
+```text
+일반 JavaScript·CDN: init()
+React 컴포넌트·훅: 내부에서 createViewake().observe(element)
+Vue directive: mounted에서 createViewake().observe(element)
+```
+
+React와 Vue 사용자가 `init()`을 추가로 호출할 필요는 없습니다. 연결 방식은 달라도 controller 아래의 위치 판단·상태 머신·CSS transition은 모두 같은 코어를 사용합니다.
+
 ## 전체 흐름
 
 ```txt
-init()
+integration이 controller 생성
   ↓
-[data-viewake] 요소 수집
+관찰할 data-viewake 요소 전달
   ↓
 초기 위치 분류: above / inside / below
   ↓
@@ -132,4 +142,4 @@ SPA나 컴포넌트 환경에서 observer를 정리하지 않으면 사라진 �
 
 - 초기 위치가 below인 요소만 pending이 되는 이유를 설명할 수 있다.
 - `isIntersecting`과 좌표 비교가 각각 무엇을 알려주는지 구분할 수 있다.
-- `init()`부터 CSS transition까지의 흐름을 순서대로 그릴 수 있다.
+- 내가 선택한 integration의 시작점부터 CSS transition까지의 흐름을 순서대로 그릴 수 있다.

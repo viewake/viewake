@@ -36,7 +36,10 @@ function applyBinding(
 ) {
   const value = normalizeBindingValue(binding.value);
   element.dataset.viewake = value.animation ?? "fade-up";
-  element.dataset.viewakeMode = value.mode ?? "once";
+
+  if (value.mode !== undefined) {
+    element.dataset.viewakeMode = value.mode;
+  }
 
   if (value.delay !== undefined) {
     element.dataset.viewakeDelay = String(value.delay);

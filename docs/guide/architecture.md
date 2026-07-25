@@ -2,12 +2,22 @@
 
 This chapter follows Viewake from initialization to a CSS transition.
 
+## Only the integration entry point changes
+
+```text
+Plain JavaScript or CDN: init()
+React component or hook: createViewake().observe(element) internally
+Vue directive: createViewake().observe(element) during mounted
+```
+
+React and Vue users do not add another `init()` call. Every integration shares the same core below the controller boundary.
+
 ## Runtime flow
 
 ```txt
-init()
+integration creates a controller
   ↓
-find [data-viewake] elements
+provide data-viewake targets
   ↓
 classify initial position: above / inside / below
   ↓
@@ -101,4 +111,4 @@ scroll event.
 
 - Explain why only below elements start pending.
 - Distinguish intersection information from geometry information.
-- Trace the complete path from `init()` to a CSS transition.
+- Trace the path from your chosen integration entry point to a CSS transition.

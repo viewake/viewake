@@ -2,7 +2,12 @@
 
 Pass options to `init()` or `createViewake()`.
 
+These examples start with the plain JavaScript core API. React and Vue pass the
+same core options through their adapters and do not add an `init()` call.
+
 ```js
+import { init } from "viewake";
+
 init({
   threshold: 0.25,
   mode: "once",
@@ -27,6 +32,47 @@ init({
 | `respectReducedMotion` | `boolean` | `true` | Honor reduced-motion preferences |
 | `onAwake` | `function` | — | Called after activation |
 | `onSleep` | `function` | — | Called when replay resets |
+
+## Passing options through framework adapters
+
+The React component separates common element timing from controller options:
+
+```tsx
+<Viewake
+  animation="fade-up"
+  mode="replay"
+  delay={200}
+  duration={900}
+  options={{
+    threshold: 0.25,
+    rootMargin: "0px 0px -40px 0px",
+  }}
+>
+  Content
+</Viewake>
+```
+
+The hook accepts core options while the animation stays on the real element:
+
+```tsx
+const ref = useViewake<HTMLElement>({
+  mode: "replay",
+  threshold: 0.25,
+});
+
+return <article ref={ref} data-viewake="fade-up">...</article>;
+```
+
+Vue puts application defaults on the plugin and element values on the
+directive:
+
+```ts
+app.use(createViewakePlugin({ threshold: 0.25, mode: "replay" }));
+```
+
+```vue
+<article v-viewake="{ animation: 'fade-up', mode: 'once' }">...</article>
+```
 
 `onAwake` runs for an actual pending-to-active entry. It does not run for an
 element that starts active because it was already inside or above the viewport,

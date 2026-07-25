@@ -26,6 +26,9 @@
 
 ## Quick start
 
+This example is for plain JavaScript. React and Vue adapters start observation
+for their own elements, so they do not call `init()`.
+
 ```bash
 npm install viewake
 ```

@@ -2,9 +2,8 @@
 
 Use Viewake like AOS with one stylesheet and one global script.
 
-::: warning Before publication
-These URLs become live after `viewake@0.1.0` is published to npm.
-:::
+Only the CDN integration calls the global `Viewake.init()`. Do not mix this
+setup with the React or Vue adapter on the same targets.
 
 ## 1. Load CSS
 
@@ -89,4 +88,4 @@ cannot change a live page unexpectedly.
 
 - Run Viewake in an otherwise empty HTML file.
 - Build once and replay with one data attribute difference.
-- Add `viewake-pop` without modifying the core.
+- Add a `pop` animation without modifying the core.

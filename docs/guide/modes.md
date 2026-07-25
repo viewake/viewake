@@ -21,6 +21,18 @@ below (pending) → enter → active
                        └─ replay + completely below again → pending
 ```
 
+## Set a default mode
+
+Plain JavaScript passes the default to the core:
+
+```js
+import { init } from "viewake";
+
+init({ mode: "replay" });
+```
+
+React uses `<Viewake mode="replay">` or `useViewake({ mode: "replay" })`. Vue uses a directive object or `createViewakePlugin({ mode: "replay" })`. Do not add `init()` when an adapter already owns the element.
+
 ## Completion check
 
 - You verified that neither mode hides an element above the viewport.

@@ -2,6 +2,9 @@
 
 옵션은 `init()` 또는 `createViewake()`에 객체로 전달합니다.
 
+이 페이지의 기본 예제는 일반 JavaScript core API 기준입니다. React와 Vue에서는
+같은 core option을 adapter 문법으로 전달하며 `init()`을 따로 호출하지 않습니다.
+
 ```js
 import { init } from "viewake";
 
@@ -31,6 +34,47 @@ init({
 | `respectReducedMotion` | `boolean` | `true` | 모션 감소 설정 존중 |
 | `onAwake` | `function` | 없음 | 요소가 활성화될 때 실행 |
 | `onSleep` | `function` | 없음 | replay 요소가 다시 준비될 때 실행 |
+
+## framework에서 option 전달
+
+React 컴포넌트는 자주 쓰는 값과 controller option을 나눕니다.
+
+```tsx
+<Viewake
+  animation="fade-up"
+  mode="replay"
+  delay={200}
+  duration={900}
+  easing="ease-out"
+  options={{
+    threshold: 0.25,
+    rootMargin: "0px 0px -40px 0px",
+  }}
+>
+  콘텐츠
+</Viewake>
+```
+
+React 훅은 animation을 제외한 core option을 직접 받습니다.
+
+```tsx
+const ref = useViewake<HTMLElement>({
+  mode: "replay",
+  threshold: 0.25,
+});
+
+return <article ref={ref} data-viewake="fade-up">...</article>;
+```
+
+Vue의 전역 기본값은 plugin에, 요소별 값은 directive binding에 작성합니다.
+
+```ts
+app.use(createViewakePlugin({ threshold: 0.25, mode: "replay" }));
+```
+
+```vue
+<article v-viewake="{ animation: 'fade-up', mode: 'once' }">...</article>
+```
 
 `onAwake`는 화면 아래에서 `pending`이었던 요소가 실제로 진입해 `active`로
 전환될 때 호출됩니다. 초기화 시 이미 화면 안·위에 있어 곧바로 active가 된

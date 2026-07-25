@@ -2,6 +2,8 @@
 
 Viewake uses `data-*` attributes for its public HTML API, leaving project class names free for your own styling.
 
+In plain JavaScript, `init()` finds elements with `[data-viewake]`. The React component or hook and the Vue directive pass their attached element directly to the controller, so they do not need a separate `init()` call. Every integration still produces the same `data-*` contract and follows the same runtime rules.
+
 ```html
 <article
   class="product-card"
@@ -26,6 +28,8 @@ Viewake uses `data-*` attributes for its public HTML API, leaving project class 
 
 Per-element mode, delay, duration, and easing override global options. Invalid
 mode or numeric timing values fall back to the global values.
+
+When you use the core package in plain JavaScript, global values come from `init(options)`. React passes controller values through the component or hook options, while Vue receives them from plugin or directive options.
 
 ## Arbitrary delays
 

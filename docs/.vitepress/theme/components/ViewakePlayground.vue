@@ -462,7 +462,7 @@ select {
 .demo-badge {
   border: 1px solid var(--viewake-accent-border);
   border-radius: 999px;
-  background: #d9ff36;
+  background: var(--viewake-accent);
   padding: 6px 10px;
   color: var(--viewake-accent-ink);
   font-size: 11px;

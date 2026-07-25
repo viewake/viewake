@@ -1,18 +1,27 @@
 # 시작하기
 
-이 페이지는 Viewake를 처음 접한 사람이 복사한 예제를 실행하고, 각 코드가 왜 필요한지 설명할 수 있게 만드는 것을 목표로 합니다.
+Viewake를 시작할 때 가장 먼저 할 일은 내 프로젝트에 맞는 연결 방식을 **하나만** 고르는 것입니다. 모든 환경에서 `init()`을 호출하는 것이 아닙니다.
 
-## 1. 설치 방법을 하나만 선택하세요
+## 1. 내 환경 선택
 
-Vite, React, Vue처럼 `package.json`이 있는 프로젝트라면 npm을 사용합니다.
+| 프로젝트 | 설치 | 관찰 시작 방법 | `init()` |
+| --- | --- | --- | --- |
+| 일반 JavaScript + Vite/Webpack | `viewake` | `init()` | 필요 |
+| React·Next.js | `viewake` + `viewake-react` | `<Viewake>` 또는 `useViewake()` | 불필요 |
+| Vue 3 | `viewake` + `viewake-vue` | `v-viewake` | 불필요 |
+| 빌드 도구 없는 HTML | CDN CSS + script | `Viewake.init()` | 필요 |
+
+::: tip 한 가지만 선택하세요
+React 컴포넌트에 `<Viewake>`를 사용하면서 같은 요소를 core `init()`으로 다시 찾지 마세요. Vue directive도 마찬가지입니다. adapter가 생명주기에 맞춰 관찰을 시작합니다.
+:::
+
+## 2. 가장 빠른 환경별 예제
+
+### 일반 JavaScript 프로젝트
 
 ```bash
 npm install viewake
 ```
-
-빌드 도구가 없는 일반 HTML 파일이라면 [CDN과 일반 HTML](/ko/guide/cdn)을 사용하세요. npm 코드와 CDN 코드를 한 페이지에 섞을 필요는 없습니다.
-
-## 2. CSS와 JavaScript를 불러오세요
 
 ```js
 import "viewake/styles.css";
@@ -21,21 +30,67 @@ import { init } from "viewake";
 init();
 ```
 
-- 첫 줄은 등장 전 모습과 움직임을 정의한 CSS를 불러옵니다.
-- 두 번째 줄은 스크롤 위치를 관찰하는 `init` 함수를 가져옵니다.
-- `init()`은 문서에서 `[data-viewake]` 요소를 찾아 관찰을 시작합니다.
-
-## 3. 움직일 요소를 표시하세요
-
 ```html
 <article data-viewake="fade-up">
   아래에서 부드럽게 등장합니다.
 </article>
 ```
 
-`data-viewake`는 “이 요소를 Viewake가 관리한다”는 표시이자 애니메이션 이름입니다. `fade-up`은 투명한 상태로 아래에 있다가 원래 자리로 올라온다는 뜻입니다.
+`init()`은 문서에서 `[data-viewake]` 요소를 모두 찾아 관찰합니다.
 
-## 4. 모드와 delay를 추가하세요
+### React 또는 Next.js
+
+```bash
+npm install viewake viewake-react
+```
+
+```tsx
+import { Viewake } from "viewake-react";
+import "viewake/styles.css";
+
+export function Feature() {
+  return (
+    <Viewake animation="fade-up">
+      기능 설명
+    </Viewake>
+  );
+}
+```
+
+여기서는 `init()`을 호출하지 않습니다. 컴포넌트가 내부에서 자기 `div`를 관찰합니다. wrapper 없이 기존 요소를 관찰해야 할 때만 훅을 사용합니다. 자세한 선택 기준은 [React와 Next.js](/ko/frameworks/react-next)를 읽으세요.
+
+### Vue 3
+
+```bash
+npm install viewake viewake-vue
+```
+
+```ts
+// src/main.ts
+import { createApp } from "vue";
+import { ViewakePlugin } from "viewake-vue";
+import "viewake/styles.css";
+
+import App from "./App.vue";
+
+createApp(App).use(ViewakePlugin).mount("#app");
+```
+
+```vue
+<article v-viewake="'fade-up'">
+  기능 설명
+</article>
+```
+
+Vue에서도 `init()`을 호출하지 않습니다. directive가 실제 `article`을 관찰합니다. 자세한 사용법은 [Vue 3](/ko/frameworks/vue)를 읽으세요.
+
+### 일반 HTML과 CDN
+
+`<link>`, `<script>`, `Viewake.init()`을 사용합니다. 전체 HTML은 [CDN과 일반 HTML](/ko/guide/cdn)에 있습니다.
+
+## 3. 공통 설정은 `data-*`로 읽기
+
+어떤 integration을 사용해도 최종 DOM에는 같은 `data-viewake-*` 계약이 남습니다.
 
 ```html
 <article
@@ -52,47 +107,56 @@ init();
 | 속성 | 값 | 의미 |
 | --- | --- | --- |
 | `data-viewake` | `zoom-in` | 사용할 CSS 애니메이션 |
-| `data-viewake-mode` | `once` 또는 `replay` | 한 번만 실행할지, 다시 실행할지 |
+| `data-viewake-mode` | `once` 또는 `replay` | 한 번만 실행할지 다시 준비할지 |
 | `data-viewake-delay` | `200` | 감지 후 기다릴 시간(ms) |
-| `data-viewake-duration` | `900` | 애니메이션이 재생되는 시간(ms) |
-| `data-viewake-easing` | `ease-out` | 움직임의 가속·감속 곡선 |
+| `data-viewake-duration` | `900` | 움직이는 시간(ms) |
+| `data-viewake-easing` | `ease-out` | 가속·감속 곡선 |
 
-`delay="200"`은 시작 전 0.2초를 기다리고, `duration="900"`은 움직임이
-0.9초 동안 이어진다는 뜻입니다. 숫자 뒤에 `ms`를 쓰지 않습니다.
+React 컴포넌트와 Vue directive는 prop·binding 값을 이 속성으로 바꿔 줍니다. 일반 JavaScript와 CDN에서는 직접 작성합니다.
 
-## 5. 실행 시점을 바꾸고 싶다면
+## 4. once와 replay
+
+- `once`: 처음 등장한 뒤 계속 보이며 다시 실행하지 않음
+- `replay`: 위로 지나간 콘텐츠는 계속 보이고, 요소가 다시 화면 아래에 완전히 놓인 뒤 다음 하강을 준비
+
+`replay`는 화면을 떠날 때 무조건 숨기는 mirror 기능이 아닙니다. 정확한 스크롤 흐름은 [once와 replay](/ko/guide/modes)에서 확인하세요.
+
+## 5. threshold와 delay를 구분하세요
 
 ```js
+// 일반 JavaScript의 전역 설정
 init({
   threshold: 0.3,
 });
 ```
 
-`threshold: 0.3`은 요소 면적의 약 30%가 관찰 영역에 들어왔을 때 실행한다는 뜻입니다. 허용 범위는 `0`부터 `1`까지이며 기본값은 `0.15`입니다. 이 값은 전체 요소에 적용하는 JavaScript 옵션이고 `data-viewake-delay`와는 역할이 다릅니다.
+- `threshold: 0.3`: 요소가 약 30% 들어온 시점에 감지
+- `delay: 200`: 감지된 뒤 200ms 기다렸다가 CSS transition 시작
+- `duration: 900`: transition 자체가 900ms 동안 진행
 
-## 브라우저에서 일어나는 일
+React에서는 `<Viewake>`의 `options` prop에 `threshold: 0.3`을 전달하고, Vue에서는 설정된 plugin option에 threshold를 전달합니다.
 
-Viewake는 내부적으로 아래 상태만 바꿉니다.
+## 6. 개발자 도구에서 성공 확인
+
+Viewake가 실행되면 화면 아래 요소의 상태가 바뀝니다.
 
 ```html
-<!-- 아직 화면 아래에 있음 -->
+<!-- 아직 화면 아래에서 대기 -->
 <article data-viewake="fade-up" data-viewake-state="pending">
 
-<!-- 실행됨 -->
+<!-- 화면에 들어와 활성화 -->
 <article data-viewake="fade-up" data-viewake-state="active">
 ```
 
-`data-viewake-state`는 라이브러리가 관리하므로 직접 작성하지 마세요. 애니메이션의 시각 효과는 CSS가, 스크롤 판단은 JavaScript가 담당합니다.
+`data-viewake-state`는 라이브러리가 관리하므로 직접 작성하지 마세요.
 
 ## 실습 완료 조건
 
-아래를 모두 확인했다면 다음 문서로 넘어가도 됩니다.
+- 내 프로젝트가 일반 JS, React, Vue, CDN 중 어디인지 선택했다.
+- 선택한 integration 하나만 사용해 요소를 등장시켰다.
+- React/Vue adapter에서는 `init()`이 필요 없다고 설명할 수 있다.
+- `once`와 `replay`를 두 번 하강하며 비교했다.
+- `threshold`, `delay`, `duration`의 차이를 설명할 수 있다.
+- 개발자 도구에서 `pending → active` 변화를 확인했다.
 
-- 새 요소에 `data-viewake="fade-up"`을 붙여 등장시켰다.
-- `data-viewake-delay="500"`으로 0.5초 지연을 확인했다.
-- `once`는 두 번째 하강에서 실행되지 않고 `replay`는 다시 실행되는 것을 확인했다.
-- 개발자 도구에서 상태가 `pending`에서 `active`로 바뀌는 것을 확인했다.
-- `threshold`와 `delay`의 차이를 말로 설명할 수 있다.
-- delay와 duration의 차이를 말로 설명할 수 있다.
-
-다음은 [data 속성 사용법](/ko/guide/data-attributes)에서 속성의 우선순위와 잘못된 값의 처리 방식을 배웁니다.
+다음은 [data 속성 사용법](/ko/guide/data-attributes)에서 모든 integration이 공유하는 DOM 계약을 배웁니다.

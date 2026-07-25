@@ -1,6 +1,6 @@
 {
   "name": "viewake-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React and Next.js adapter for Viewake.",
   "author": "Viewake contributors",
   "homepage": "https://viewake.github.io/viewake/frameworks/react-next",

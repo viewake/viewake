@@ -1,10 +1,14 @@
 # Controller와 이벤트
 
+이 페이지는 일반 JavaScript에서 `viewake` 코어를 직접 제어하는 고급 API를 설명합니다. React 컴포넌트·훅과 Vue 디렉티브는 컨트롤러의 생성과 정리를 대신하므로, 보통 이 API나 별도의 `init()`을 사용할 필요가 없습니다.
+
 ## `init(options?)`
 
 컨트롤러를 만들고 설정된 선택자를 즉시 관찰합니다.
 
 ```ts
+import { init } from "viewake";
+
 const controller = init({
   mode: "replay",
 });
@@ -15,6 +19,8 @@ const controller = init({
 아직 요소를 관찰하지 않는 컨트롤러를 만듭니다.
 
 ```ts
+import { createViewake } from "viewake";
+
 const controller = createViewake({
   threshold: 0.2,
 });
@@ -68,18 +74,24 @@ controller.destroy();
 이벤트는 애니메이션 대상 요소에서 발생하며 상위 DOM으로 버블링됩니다.
 
 ```ts
+import type { ViewakeEventDetail } from "viewake";
+
 document.addEventListener("viewake:awake", (event) => {
-  const { sequence, timestamp, animation } = event.detail;
+  const { sequence, timestamp, animation } = (
+    event as CustomEvent<ViewakeEventDetail>
+  ).detail;
   console.log(sequence, timestamp, "awake", animation);
 });
 
 document.addEventListener("viewake:sleep", (event) => {
-  const { sequence, timestamp, animation } = event.detail;
+  const { sequence, timestamp, animation } = (
+    event as CustomEvent<ViewakeEventDetail>
+  ).detail;
   console.log(sequence, timestamp, "sleep", animation);
 });
 ```
 
-`detail`에는 다음 정보가 담깁니다.
+`addEventListener()`가 기본적으로 `event`를 `Event`로 추론하기 때문에 TypeScript에서는 `CustomEvent<ViewakeEventDetail>`로 타입을 좁혀야 합니다. `detail`에는 다음 정보가 담깁니다.
 
 ```ts
 type ViewakeEventDetail = {
